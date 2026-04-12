@@ -1,3 +1,11 @@
+import axios from "axios";
+axios.defaults.baseURL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:8000"
+    : "https://ecommerce-website-vriv.onrender.com";
+
+axios.defaults.withCredentials = true;
+
 import { StrictMode } from 'react'
 import "./App.css"
 import { createRoot } from 'react-dom/client'
