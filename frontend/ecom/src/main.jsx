@@ -2,7 +2,7 @@ import axios from "axios";
 axios.defaults.baseURL =
   import.meta.env.MODE === "development"
     ? "http://localhost:8000"
-    : "https://ecommerce-website-vriv.onrender.com";
+    : "https://ecommerce-website-1-qn2m.onrender.com";
 
 axios.defaults.withCredentials = true;
 
