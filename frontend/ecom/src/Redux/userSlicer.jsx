@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios"
+import api from "api"
 
 export const register = createAsyncThunk("user/register", async(userData, {rejectWithValue}) => {
     try {
@@ -8,7 +8,7 @@ export const register = createAsyncThunk("user/register", async(userData, {rejec
                 "Content-Type" : "multipart/form-data"
             }
         }
-        const {data} = await axios.post("/api/v1/register", userData, config)
+        const {data} = await api.post("/api/v1/register", userData, config)
         return data
     } catch (error) {
         return rejectWithValue(error.response?.data || "Registration failed. Please fill out the required fields")
@@ -23,7 +23,7 @@ export const updateProfile = createAsyncThunk("update/profile", async(userData, 
                 "Content-Type" : "application/json"
             }
         }
-        const {data} = await axios.put("/api/v1/profile/update", userData, config)
+        const {data} = await api.put("/api/v1/profile/update", userData, config)
         return data
     } catch (error) {
        console.log("ERROR:", error.response)
@@ -38,7 +38,7 @@ export const login = createAsyncThunk("user/login", async (userData, { rejectWit
           "Content-Type": "application/json"
         }
       }
-      const { data } = await axios.post("/api/v1/login", userData, config)
+      const { data } = await api.post("/api/v1/login", userData, config)
       return data
     } catch (error) {
       return rejectWithValue(error.response?.data|| "Login failed")
@@ -48,7 +48,7 @@ export const login = createAsyncThunk("user/login", async (userData, { rejectWit
 
 export const profile = createAsyncThunk("user/profile", async(_, {rejectWithValue}) => {
     try {
-        const {data} = await axios.get("/api/v1/profile")
+        const {data} = await api.get("/api/v1/profile")
         return data
     } catch (error) {
         return rejectWithValue(error.response?.data|| "Login Failed. Please try again later")
@@ -57,7 +57,7 @@ export const profile = createAsyncThunk("user/profile", async(_, {rejectWithValu
 
 export const neworder = createAsyncThunk("user/order", async(orderdata, {rejectWithValue}) => {
     try {
-        const {data} = await axios.post("/api/v1/new/order", orderdata, {
+        const {data} = await api.post("/api/v1/new/order", orderdata, {
             withCredentials: true
         })
         return data
@@ -68,7 +68,7 @@ export const neworder = createAsyncThunk("user/order", async(orderdata, {rejectW
 
 export const myorders = createAsyncThunk("my/order", async(id, {rejectWithValue}) => {
     try {
-        const {data} = await axios.get(`/api/v1/orders/user/${id}`, {
+        const {data} = await api.get(`/api/v1/orders/user/${id}`, {
             withCredentials: true
         })
             // console.log("USER ID:", id);

@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "api";
 
 export const getDashboardDetails = createAsyncThunk("admin/dashboard", async(_, {rejectWithValue}) => {
     try {
-        const {data} = await axios.get("/api/v1/admin/dashboard", {
+        const {data} = await api.get("/api/v1/admin/dashboard", {
             withCredentials: true
         })
         return data
@@ -14,7 +14,7 @@ export const getDashboardDetails = createAsyncThunk("admin/dashboard", async(_, 
 
 export const orderDetails = createAsyncThunk("admin/orders", async(_, {rejectWithValue}) => {
     try {
-        const {data} = await axios.get("/api/v1/admin/orders", {
+        const {data} = await api.get("/api/v1/admin/orders", {
             withCredentials: true
         })
         return data
@@ -30,7 +30,7 @@ export const addProduct = createAsyncThunk("add/product", async(productData, {re
                 "Content-Type" : "application/json"
             }
         }
-    const {data} = await axios.post("/api/v1/products/add", productData, config)
+    const {data} = await api.post("/api/v1/products/add", productData, config)
     return data
     } catch (error) {
         return rejectWithValue(error.response?.data)
@@ -43,7 +43,7 @@ export const getUsers = createAsyncThunk("admin/users", async({keyword, page = 1
         if(keyword){
             link += `&keyword=${keyword}`
         }
-        const {data} = await axios.get(link, {withCredentials: true})
+        const {data} = await api.get(link, {withCredentials: true})
         return data
     } catch (error) {
         return rejectWithValue(error.response?.data)
@@ -52,7 +52,7 @@ export const getUsers = createAsyncThunk("admin/users", async({keyword, page = 1
 
 export const updateRole = createAsyncThunk("/user/role", async({id, role}, {rejectWithValue}) => {
     try {
-        const {data} = await axios.put(`/api/v1/admin/user/role/${id}`,{role}, {
+        const {data} = await api.put(`/api/v1/admin/user/role/${id}`,{role}, {
             withCredentials: true
         })    
         return data    
@@ -63,7 +63,7 @@ export const updateRole = createAsyncThunk("/user/role", async({id, role}, {reje
 
 export const deleteUsers = createAsyncThunk("admin/deleteuser", async(id, {rejectWithValue}) => {
     try { 
-        const {data} = await axios.delete(`/api/v1/admin/user/delete/${id}`, {
+        const {data} = await api.delete(`/api/v1/admin/user/delete/${id}`, {
             withCredentials: true
         })
         return {id, data}
@@ -74,7 +74,7 @@ export const deleteUsers = createAsyncThunk("admin/deleteuser", async(id, {rejec
 
 export const deleteOrders = createAsyncThunk("delete/orders", async(id, {rejectWithValue}) => {
     try {
-        const {data} = await axios.delete(`/api/v1/admin/order/${id}`, {
+        const {data} = await api.delete(`/api/v1/admin/order/${id}`, {
             withCredentials : true
         })
         return data
@@ -85,7 +85,7 @@ export const deleteOrders = createAsyncThunk("delete/orders", async(id, {rejectW
 
 export const getSingleOrder = createAsyncThunk("admin/order", async(id, {rejectWithValue}) => {
     try {
-        const {data} = await axios.get(`/api/v1/order/${id}`)
+        const {data} = await api.get(`/api/v1/order/${id}`)
         return data
     } catch (error) {
         return rejectWithValue(error.response?.data)
@@ -94,7 +94,7 @@ export const getSingleOrder = createAsyncThunk("admin/order", async(id, {rejectW
 
 export const userOrders = createAsyncThunk("user/order", async(id, {rejectWithValue}) => {
     try {
-        const {data} = await axios.get(`/api/v1/orders/user/${id}`, {
+        const {data} = await api.get(`/api/v1/orders/user/${id}`, {
         withCredentials : true
     })
     return data
@@ -106,7 +106,7 @@ export const userOrders = createAsyncThunk("user/order", async(id, {rejectWithVa
 
 export const updateOrder = createAsyncThunk("update/order", async({id, status}, {rejectWithValue}) => {
     try {
-        const {data} = await axios.put(`/api/v1/admin/order/${id}`, {status}, {
+        const {data} = await api.put(`/api/v1/admin/order/${id}`, {status}, {
             withCredentials: true
         })
         return data
@@ -122,7 +122,7 @@ export const editProduct = createAsyncThunk("edit/product", async({id, editProdu
                 "Content-Type" : "application/json"
             }
         }
-        const {data} = await axios.put(`/api/v1/admin/product/${id}`, editProductData, config)
+        const {data} = await api.put(`/api/v1/admin/product/${id}`, editProductData, config)
         return data        
     } catch (error) {
         return rejectWithValue(error.response?.data)

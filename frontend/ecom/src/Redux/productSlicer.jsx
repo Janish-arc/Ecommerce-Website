@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import axios from 'axios'
+import api from 'api'
 
 export const getProduct = createAsyncThunk("products/getProduct", async ({keyword, page = 1, category, sort}, {rejectWithValue}) => {
     try {
@@ -14,7 +14,7 @@ export const getProduct = createAsyncThunk("products/getProduct", async ({keywor
         if(sort){
             link += `&sort=${sort}`
         }
-        const {data} = await axios.get(link)
+        const {data} = await api.get(link)
         return data
     } catch (error) {
         return rejectWithValue(error.response?.data || "Something went wrong..!")
@@ -24,7 +24,7 @@ export const getProduct = createAsyncThunk("products/getProduct", async ({keywor
 export const latestProduct = createAsyncThunk("products/latest", async (_, {rejectWithValue}) => {
     try{
         const link = '/api/v1/latest/products'
-        const {data} = await axios.get(link)
+        const {data} = await api.get(link)
         return data
     }catch(error){
         return rejectWithValue(error.response?.data || "Something went wrong")
@@ -34,7 +34,7 @@ export const latestProduct = createAsyncThunk("products/latest", async (_, {reje
 export const getProductDetails = createAsyncThunk("products/getProductDetails", async (id, {rejectWithValue}) => {
     try {
         const link = `/api/v1/product/${id}`
-        const {data} = await axios.get(link)
+        const {data} = await api.get(link)
         return data
     } catch (error) {
         return rejectWithValue(error.response?.data || "Something went wrong..!")
@@ -47,7 +47,7 @@ export const adminProducts = createAsyncThunk("admin/products", async({keyword, 
         if(keyword){
             link += `&keyword=${keyword}`
         }
-        const {data} = await axios.get(link)
+        const {data} = await api.get(link)
         return data
     } catch (error) {
         return rejectWithValue(error.response?.data)
@@ -56,7 +56,7 @@ export const adminProducts = createAsyncThunk("admin/products", async({keyword, 
 
 export const deleteProducts = createAsyncThunk("admin/deleteproduct", async(id, {rejectWithValue}) => {
     try { 
-        const {data} = await axios.delete(`/api/v1/admin/product/${id}`)
+        const {data} = await api.delete(`/api/v1/admin/product/${id}`)
         return {id, data}
     } catch (error) {
         return rejectWithValue(error.response?.data)
@@ -65,7 +65,7 @@ export const deleteProducts = createAsyncThunk("admin/deleteproduct", async(id, 
 
 export const review = createAsyncThunk("user/review", async(reviewData, {rejectWithValue}) => {
     try {
-        const {data} = await axios.put("/api/v1/review", reviewData, {
+        const {data} = await api.put("/api/v1/review", reviewData, {
             withCredentials: true
         })
         return data

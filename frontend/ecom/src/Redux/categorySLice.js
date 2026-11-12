@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "api";
 
 export const getCategory = createAsyncThunk("get/category", async(_, {rejectWithValue}) => {
     try {
-        const {data} = await axios.
+        const {data} = await api.
         get("/api/v1/get/category", { withCredentials: true })
         return data
     } catch (error) {
@@ -13,7 +13,7 @@ export const getCategory = createAsyncThunk("get/category", async(_, {rejectWith
 
 export const addCategory = createAsyncThunk("add/category", async(categoryData, {rejectWithValue}) => {
     try{
-        const {data} = await axios.post("/api/v1/add/category", categoryData)
+        const {data} = await api.post("/api/v1/add/category", categoryData)
         return data
     }catch(error){
         return rejectWithValue(error.response?.data)
@@ -22,7 +22,7 @@ export const addCategory = createAsyncThunk("add/category", async(categoryData, 
 
 export const editCategory = createAsyncThunk("edit/category", async({id, categoryData} , {rejectWithValue}) => {
     try {
-        const {data} = await axios.put(`/api/v1/edit/category/${id}`, categoryData)
+        const {data} = await api.put(`/api/v1/edit/category/${id}`, categoryData)
         return data
     } catch (error) {
         return rejectWithValue(error.response?.data)
@@ -31,7 +31,7 @@ export const editCategory = createAsyncThunk("edit/category", async({id, categor
 
 export const deleteCategory = createAsyncThunk("delete/category", async(id, {rejectWithValue}) => {
     try {
-        const {data} = await axios.delete(`/api/v1/delete/category/${id}`)
+        const {data} = await api.delete(`/api/v1/delete/category/${id}`)
         return {id, data}
     } catch (error) {
         return rejectWithValue(error.response?.data)
