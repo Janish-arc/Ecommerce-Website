@@ -73,12 +73,12 @@ export const Products = () => {
     dispatch(getProduct({ keyword, page: currentPage, category, sort }))
 
     // 👇 remove keyword from URL after using it
-    if (keyword) {
-      const newSearchParams = new URLSearchParams(searchParams)
-      newSearchParams.delete("keyword")
+    // if (keyword) {
+    //   const newSearchParams = new URLSearchParams(searchParams)
+    //   newSearchParams.delete("keyword")
 
-      navigate(`?${newSearchParams.toString()}`, { replace: true })
-    }
+    //   navigate(`?${newSearchParams.toString()}`, { replace: true })
+    // }
 
   }, [dispatch, keyword, currentPage, category, sort])
 

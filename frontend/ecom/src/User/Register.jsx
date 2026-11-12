@@ -40,6 +40,7 @@ export const Register = () => {
       setUser({...user, [e.target.name]:e.target.value})
     }
   }
+  
   const registerNow = (e) => {
     e.preventDefault()
     if(!name || !email || !password){

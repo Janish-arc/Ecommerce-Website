@@ -1,4 +1,4 @@
-import express from 'express'
+    import express from 'express'
 import { roleBasedAccess, verifyUser } from '../helper/userAuth.js';
 import { loginUser, logoutUser, registerUser, forgotPassword, resetPassword, profile, updatePassword, updateProfile, getAllUsers, getSingleUser, updateRole, deleteUser, adminDashboard } from "../controller/userController.js";
 

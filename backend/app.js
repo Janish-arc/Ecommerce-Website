@@ -11,7 +11,7 @@ import category from "./routes/categoryRoutes.js"
 
 const app = express()
 app.use(cors({
-  origin: ["http://localhost:5173", "https://ecommerce-website-project-53f8.onrender.com"],
+  origin: "http://localhost:5173",
   credentials: true
 }))
 app.use(express.json({ limit: "10mb" }));

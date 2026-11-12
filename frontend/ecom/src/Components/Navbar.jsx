@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {ChevronDown, HomeIcon, Menu, Package, PhoneCall, Search, ShoppingBag, ShoppingCart, User, User2, X} from 'lucide-react'
+import {ChevronDown, HomeIcon, Menu, Package, PhoneCall, Search, ShoppingBag, ShoppingCart, User, User2, UserCircle2Icon, X} from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
@@ -57,6 +57,9 @@ export const Navbar = () => {
   return (
     <nav style={{backgroundColor:"white", color:"black "}}>
        <div className=' d-flex justify-content-between px-3 shadow align-items-center flex-nowrap navbar'>
+        <span onClick={() => setOpen(!open)} className='text-secondary d-block d-md-none position-relative'>
+              <button className='btn p-0' title='Menu'>{open ? <X onClick={(e) => setOpen(!open)}/> :<div className='d-flex gap-1'> <Menu className='text-black' onClick={() => setOpen(open)}/> <h5>All </h5></div>}</button>
+            </span>
         <div className=' d-flex gap-4 align-items-center' style={{color: '#0071E3'}} >
         <b className='d-flex fs-5 '><Link to="/" className='fs-6' style={{color: '#0071E3'}}> <ShoppingBag/> </Link> <div className='d-flex' onClick={() => navigate("/")} style={{cursor:"pointer"}}>Circuit Store</div></b>
         <div className='text-white primary-btn rounded d-flex align-items-center me-2 px-2 py-2' style={{cursor:"pointer"}} onClick={() => setPop(!pop)}>All Products<span ><ChevronDown size={18}/></span></div>
@@ -77,20 +80,6 @@ export const Navbar = () => {
             ))}
           </div>  
         )}
-
-
-        
-        {/* {isAuthenticated && 
-        <div className='d-flex fw-medium d-none d-md-block' style={{fontSize:"18px"}}>
-          <Link to="/" className='links px-3 text-decoration-none text-black' >Home</Link>
-          
-          {user?.role === "user" &&
-          <>
-          <Link to="/about-us" className='links px-3 text-decoration-none text-black'>About</Link>
-          <Link to="/contact-us" className='links px-3 text-decoration-none text-black'>Contact Us</Link>
-          </> }  
-          </div>
-        } */}
         
         <div className='d-flex gap-3'>
           <form onSubmit={handleSearch} className='d-none d-md-flex align-items-center border rounded search-bar'> 
@@ -114,21 +103,32 @@ export const Navbar = () => {
           <Link to="/login" className='btn primary-btn' title='Login' style={{height: " 30px", width:'100px', fontSize : "14px"}}><div><User className='mb-2' size={17}/>Log in</div></Link>
           </span>)}
           {!loading && isAuthenticated && 
-          <div className='btn primary-btn btn d-none d-md-flex justify-content-center' style={{ fontSize : "14px"}} onClick={() => navigate('/user')}>Account</div> }
+          <>
+          <div className='btn primary-btn btn d-none d-md-flex justify-content-center' style={{ fontSize : "14px"}} onClick={() => navigate('/user')}>Account</div>
+          <div className='btn primary-btn btn d-none d-md-flex justify-content-center' style={{ fontSize : "14px"}} onClick={() => navigate('/myorder')}>My Order</div> 
+          </> }
             
-            <span onClick={() => setOpen(!open)} className='text-secondary d-block d-md-none position-relative'>
-              <button className='btn p-0' title='Menu'>{open ? <X onClick={(e) => setOpen(!open)}/> : <Menu className='text-secondary' onClick={() => setOpen(open)}/>}</button>
-            </span>
+            
             {open && 
-            <div className='d-flex flex-column d-xl-none position-absolute mt-5 p-2 rounded gap-1' style={{width: '165px', height:'220px', zIndex: '100', right: '-0px', backgroundColor: "rgb(244, 248, 251)"}}>
-              <Link onClick={() => setOpen(!open)} to="/" className='links text-decoration-none text-black' ><button className='btn primary-btn' style={{width:"150px"}}><HomeIcon size={16}/> Home</button></Link>
-              <Link onClick={() => setOpen(!open)} to="/products" className='links text-decoration-none text-black'><button className='btn primary-btn' style={{width:"150px"}}><Package size={16} /> Products</button></Link>
-              <Link onClick={() => setOpen(!open)} to="/about-us" className='links text-decoration-none text-black'><button className='btn primary-btn' style={{width:"150px"}}><User size={16} /> About</button></Link>
-              <Link onClick={() => setOpen(!open)} to="/contact-us" className='links text-decoration-none text-black'><button className='btn primary-btn' style={{width:"150px"}}><PhoneCall size={16} /> Contact Us</button></Link>
-              <Link onClick={() => setOpen(!open)} to="/login" className='links text-decoration-none text-black'><button className='btn primary-btn' style={{width:"150px"}}><User2 size={16} /> Log in</button></Link>
-              {user?.role === "admin" && 
-              <Link onClick={() => setOpen(!open)} to="/admin/dashboard" className='links text-decoration-none text-black'><button className='btn primary-btn' style={{width:"150px"}}><User2 size={16} /> Admin</button></Link>
-              }
+            <div className='d-flex flex-column d-xl-none position-absolute mt-5 rounded gap-1 vh-100' style={{width: '350px', zIndex: '100', left: '0px', backgroundColor: "rgb(244, 248, 251)"}}>
+              <div className='bg-secondary text-white fw-bold ps-4 p-2 d-flex  align-items-center'><UserCircle2Icon size={27}/><h3 className='pt-1 ps-1'> Hello, Janish</h3></div>
+              <div className='p-2 ps-4 d-flex flex-column'>
+              <Link onClick={() => setOpen(!open)} to="/" className='links text-decoration-none text-black' ><button className='btn '> Home</button></Link>
+              <Link onClick={() => setOpen(!open)} to="/products" className='links text-decoration-none text-black'><button className='btn' > Products</button></Link>
+              <hr/>
+              <div className='d-flex flex-column'>
+                <h5 className='fw-bold'>Help & Settings</h5>
+                <Link onClick={() => setOpen(!open)} to="/about-us" className='links text-decoration-none text-black '><button className='btn fw-semibold'> About</button></Link>
+                <Link onClick={() => setOpen(!open)} to="/contact-us" className='links text-decoration-none text-black'><button className='btn fw-semibold' >Contact Us</button></Link>
+                <Link onClick={() => setOpen(!open)} to="/login" className='links text-decoration-none text-black'><button className='btn fw-semibold'> Log in</button></Link>
+                <Link onClick={() => setOpen(!open)} to="/myorder" className='links text-decoration-none text-black'><button className='btn fw-semibold'> My Order</button></Link>
+                {user?.role === "admin" && 
+                <>
+                <Link onClick={() => setOpen(!open)} to="/admin/dashboard" className='links text-decoration-none text-black'><button className='btn fw-semibold'> Admin</button></Link>
+                
+                </>}
+              </div>
+              </div>
             </div>
             }
         </div>

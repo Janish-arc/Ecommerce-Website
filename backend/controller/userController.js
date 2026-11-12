@@ -1,4 +1,4 @@
-import handleError from "../helper/handleError.js"
+
 import { sendToken } from "../helper/jwt.js"
 import { sendMail } from "../helper/sendEmail.js"
 import User from "../models/userModels.js"
@@ -7,6 +7,7 @@ import Order from "../models/orderModels.js"
 import crypto from 'crypto'
 import {v2 as cloudinary} from "cloudinary"
 import Apihelper from "../helper/Apihelper.js"
+import handleError from "../helper/handleError.js" 
 
 
 //User Registratiion
@@ -24,7 +25,7 @@ export const registerUser =async (req, res, next) => {
     }
     const myCloud = await cloudinary.uploader.upload(avatar, {
         folder: "ECOM_AVATAR",
-        width: 150,
+        width: 150, 
         crop: "scale"
     })
     const user = await User.create({
@@ -56,7 +57,7 @@ export const loginUser = async(req, res, next) => {
 export const logoutUser = (req, res, next) => {
     const options = {expires: new Date(Date.now()), httpOnly: true}
     res.cookie("token", null, options)
-    return res.status(201).send({succes:true, message:"Logged out successfully"})
+    return res.status(201).send({success:true, message:"Logged out successfully"})
 }
 
 //Forgot Password 

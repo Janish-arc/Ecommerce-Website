@@ -104,7 +104,7 @@ export const SingleOrderDetails = () => {
                     </div>
                     <div className='d-flex mb-2'>
                         <span style={{width:"150px"}}><b>Total Spent: </b></span>
-                        <span>₹{userOrderAmount.toLocaleString()}</span>
+                        <span>₹{userOrderAmount?.toLocaleString()}</span>
                     </div>
                     </div>
                     </div>
@@ -114,7 +114,7 @@ export const SingleOrderDetails = () => {
                     {/* ORDER SUMMARY */}
                     <div className="shadow p-4 rounded h-100" style={{ background: "linear-gradient(to right, #1f2937, #31507b)", color:"white"}}>
                     <h4 style={{textTransform:"uppercase"}}><b>Order Summary</b></h4>
-                    <div className='ms-4 mt-3'>
+                    <div className='ms-4 mt-3'>  
                     <div className="d-flex mb-2">
                         <span style={{width:"200px"}}><b>Items:</b></span>
                         <span>{singleOrder?.orderItems?.length}</span>

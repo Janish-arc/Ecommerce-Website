@@ -96,11 +96,11 @@ if(!isAuthenticated){
   return (
     <div>
         <PageTitle title={`${product?.name} | Details`}/>
-        <div className="position-fixed w-100" style={{marginTop:'0px', paddingTop:"0px", zIndex:"50"}}>
+        <div className="position-fixed w-100 mb-5" style={{marginTop:'0px', paddingTop:"0px", zIndex:"50"}}>
                 <Navbar/>
-            </div> 
+            </div>  
         <main className="container p-4 p-md-5" >
-            <div className='row g-0 mt-5'>
+            <div className='row g-0'>
                 <div className="col-12 col-lg-6 img-fluid d-flex pb-2 justify-content-center overflow-hidden">
                     <div className='d-flex flex-column gap-4'>
                     <div className='ratio ratio-1x1 img-cont mt-5 p-5' style={{ maxWidth: "400px" , minWidth:"400px"}} >
