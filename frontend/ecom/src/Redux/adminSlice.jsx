@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import api from "api";
+import api from "../api/axios";
 
 export const getDashboardDetails = createAsyncThunk("admin/dashboard", async(_, {rejectWithValue}) => {
     try {

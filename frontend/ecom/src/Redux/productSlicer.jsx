@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import api from 'api'
+import api from "../api/axios"
 
 export const getProduct = createAsyncThunk("products/getProduct", async ({keyword, page = 1, category, sort}, {rejectWithValue}) => {
     try {

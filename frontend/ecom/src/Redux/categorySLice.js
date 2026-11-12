@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import api from "api";
+import api from "../api/axios";
 
 export const getCategory = createAsyncThunk("get/category", async(_, {rejectWithValue}) => {
     try {
